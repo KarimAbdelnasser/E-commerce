@@ -6,6 +6,12 @@ This is a backend application built with TypeScript and Node.js, designed to pro
 
 The E-commerce App is a full-fledged e-commerce solution that allows users to browse products, add them to their cart, and complete the checkout process. It also provides features such as user registration and login, order history, and email notifications.
 
+### Live on Vercel
+
+```bash
+https://amazon-commerce.vercel.app/docs/
+```
+
 ## Getting Started
 
 To run the project locally, follow these steps:
