@@ -9,8 +9,10 @@ The E-commerce App is a full-fledged e-commerce solution that allows users to br
 ### Live on Vercel
 
 ```bash
-https://amazon-commerce.vercel.app/docs/
+  https://amazon-commerce.vercel.app/docs/
 ```
+
+-   APIs documentation
 
 ## Getting Started
 
