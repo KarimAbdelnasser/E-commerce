@@ -30,9 +30,6 @@ export = (app: express.Application) => {
         res.send(swaggerSpec);
     });
     app.use((req: Request, res: Response, next: NextFunction) => {
-        const error = new Error(
-            `Cannot ${req.method} ${req.url}, No such route in this server!`
-        );
-        res.status(404).send(error.message);
+        res.redirect("/docs");
     });
 };
