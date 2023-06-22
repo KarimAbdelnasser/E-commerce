@@ -2,6 +2,8 @@ import { Router } from "express";
 import * as userControllers from "../controllers/users.controller";
 import { validateUser } from "../middleware/validateUser";
 import auth from "../middleware/auth";
+import auditMiddleware from "../middleware/audit";
+
 const router = Router();
 
 router.route("/").post(validateUser, userControllers.create);
@@ -72,7 +74,7 @@ router.route("/").post(validateUser, userControllers.create);
  *                   example: An error occurred
  */
 
-router.route("/me").get(auth, userControllers.getUser);
+router.route("/me").get(auth, auditMiddleware, userControllers.getUser);
 
 /**
  * @openapi
@@ -135,7 +137,7 @@ router.route("/me").get(auth, userControllers.getUser);
  *                   example: An error occurred
  */
 
-router.route("/update").put(auth, userControllers.update);
+router.route("/update").put(auth, auditMiddleware, userControllers.update);
 
 /**
  * @openapi
@@ -218,7 +220,7 @@ router.route("/update").put(auth, userControllers.update);
  *                   example: An error occurred
  */
 
-router.route("/seller").get(auth, userControllers.seller);
+router.route("/seller").get(auth, auditMiddleware, userControllers.seller);
 
 /**
  * @openapi
@@ -295,7 +297,9 @@ router.route("/seller").get(auth, userControllers.seller);
  *                   example: An error occurred
  */
 
-router.route("/confirmation/:email").put(auth, userControllers.confirmUser);
+router
+    .route("/confirmation/:email")
+    .put(auth, auditMiddleware, userControllers.confirmUser);
 
 /**
  * @openapi
@@ -378,7 +382,9 @@ router.route("/confirmation/:email").put(auth, userControllers.confirmUser);
  *                   example: An error occurred
  */
 
-router.route("/delete").delete(auth, userControllers.deleteUser);
+router
+    .route("/delete")
+    .delete(auth, auditMiddleware, userControllers.deleteUser);
 
 /**
  * @openapi

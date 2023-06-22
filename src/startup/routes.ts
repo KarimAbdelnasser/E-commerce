@@ -6,19 +6,11 @@ import { ordersRouter } from "../routes/orders";
 import { morganMiddleware } from "../utilities/morganConfig";
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "../utilities/swagger";
-import auditMiddleware from "../middleware/audit";
 
 export = (app: express.Application) => {
     app.use(express.json());
     app.use(morganMiddleware);
     app.use(bodyParser.json());
-    app.use((req: Request, res: Response, next: NextFunction) => {
-        if (req.path.startsWith("/docs") || req.path === "/user") {
-            next();
-        } else {
-            auditMiddleware(req, res, next);
-        }
-    });
     app.use("/user", usersRouter);
     app.use("/product", productsRouter);
     app.use("/order", ordersRouter);

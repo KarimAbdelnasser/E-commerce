@@ -3,11 +3,18 @@ import * as productControllers from "../controllers/products.controller";
 import auth from "../middleware/auth";
 import checkSeller from "../middleware/seller";
 import { validateProduct } from "../middleware/validateProduct";
+import auditMiddleware from "../middleware/audit";
 const router = Router();
 
 router
     .route("/new")
-    .post(auth, validateProduct, checkSeller, productControllers.create);
+    .post(
+        auth,
+        auditMiddleware,
+        validateProduct,
+        checkSeller,
+        productControllers.create
+    );
 
 /**
  * @openapi
@@ -227,7 +234,9 @@ router.route("/:id").get(productControllers.getOne);
  *               error: "An error occurred"
  */
 
-router.route("/update/:id").put(auth, checkSeller, productControllers.update);
+router
+    .route("/update/:id")
+    .put(auth, auditMiddleware, checkSeller, productControllers.update);
 
 /**
  * @openapi
@@ -308,7 +317,12 @@ router.route("/update/:id").put(auth, checkSeller, productControllers.update);
 
 router
     .route("/delete/:id")
-    .delete(auth, checkSeller, productControllers.deleteProduct);
+    .delete(
+        auth,
+        auditMiddleware,
+        checkSeller,
+        productControllers.deleteProduct
+    );
 
 /**
  * @openapi

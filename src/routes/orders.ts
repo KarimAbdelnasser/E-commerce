@@ -1,9 +1,10 @@
 import { Router } from "express";
 import * as orderControllers from "../controllers/orders.controller";
 import auth from "../middleware/auth";
+import auditMiddleware from "../middleware/audit";
 const router = Router();
 
-router.route("/new").post(auth, orderControllers.create);
+router.route("/new").post(auth, auditMiddleware, orderControllers.create);
 
 /**
  * @openapi
@@ -66,7 +67,7 @@ router.route("/new").post(auth, orderControllers.create);
  *               $ref: '#/components/schemas/ErrorResponse'
  */
 
-router.route("/:id").get(auth, orderControllers.getOne);
+router.route("/:id").get(auth, auditMiddleware, orderControllers.getOne);
 
 /**
  * @openapi
@@ -142,7 +143,9 @@ router.route("/:id").get(auth, orderControllers.getOne);
  *                   example: "An error occurred"
  */
 
-router.route("/delete/:id").delete(auth, orderControllers.deleteOrder);
+router
+    .route("/delete/:id")
+    .delete(auth, auditMiddleware, orderControllers.deleteOrder);
 
 /**
  * @openapi
@@ -206,7 +209,7 @@ router.route("/delete/:id").delete(auth, orderControllers.deleteOrder);
  *                   example: "An error occurred"
  */
 
-router.route("/arrived").get(auth, orderControllers.arrived);
+router.route("/arrived").get(auth, auditMiddleware, orderControllers.arrived);
 
 /**
  * @openapi
@@ -271,7 +274,9 @@ router.route("/arrived").get(auth, orderControllers.arrived);
  *                   example: "An error occurred"
  */
 
-router.route("/confirmation/:id").put(auth, orderControllers.confirm);
+router
+    .route("/confirmation/:id")
+    .put(auth, auditMiddleware, orderControllers.confirm);
 
 /**
  * @openapi
