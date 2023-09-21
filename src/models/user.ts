@@ -6,8 +6,8 @@ import Joi from "joi";
 const User = sequelize.define("User", {
     id: {
         type: DataTypes.UUID,
-        defaultValue: v4(),
         primaryKey: true,
+        defaultValue: () => v4(),
     },
     username: {
         type: DataTypes.STRING,

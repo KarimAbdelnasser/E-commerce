@@ -43,7 +43,7 @@ export const create = async (
                 },
             });
     } catch (error) {
-        logger.error("Error creating a new user:", (error as Error).message);
+        logger.error(`Error creating a new user: ${(error as Error).message}`);
         return res.status(500).json({ error: "An error occurred" });
     }
 };
