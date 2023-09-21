@@ -144,7 +144,7 @@ export const create = async (
             });
         }
     } catch (error) {
-        logger.error("Error creating an order:", (error as Error).message);
+        logger.error(`Error creating an order: ${(error as Error).message}`);
         return res.status(500).json({ error: (error as Error).message });
     }
 };
@@ -171,8 +171,7 @@ export const getOne = async (
             .json({ orderInformation: products, orderInDetail: orderItems });
     } catch (error) {
         logger.error(
-            "Error getting an existing order:",
-            (error as Error).message
+            `Error getting an existing order: ${(error as Error).message}`
         );
         res.status(500).json({ error: (error as Error).message });
     }
@@ -230,8 +229,9 @@ export const arrived = async (
         });
     } catch (error) {
         logger.error(
-            "Error sending a mail to a user to mention that the order has been arrived:",
-            (error as Error).message
+            `Error sending a mail to a user to mention that the order has been arrived: ${
+                (error as Error).message
+            }`
         );
         res.status(500).json({ error: (error as Error).message });
     }
@@ -262,8 +262,9 @@ export const confirm = async (
         });
     } catch (error) {
         logger.error(
-            "Error confirm the completion of the delivery process:",
-            (error as Error).message
+            `Error confirm the completion of the delivery process: ${
+                (error as Error).message
+            }`
         );
         res.status(500).json({ error: (error as Error).message });
     }
@@ -288,8 +289,7 @@ export const deleteOrder = async (
         }
     } catch (error) {
         logger.error(
-            "Error deleting an existing order:",
-            (error as Error).message
+            `Error deleting an existing order: ${(error as Error).message}`
         );
         res.status(500).json({ error: (error as Error).message });
     }

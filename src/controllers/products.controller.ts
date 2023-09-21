@@ -38,7 +38,9 @@ export const create = async (req: Request & { user?: User }, res: Response) => {
             });
         }
     } catch (error) {
-        logger.error((error as Error).message);
+        logger.error(
+            `Error creating a new product: ${(error as Error).message}`
+        );
         return res.status(500).json({ error: "An error occurred" });
     }
 };
@@ -66,7 +68,7 @@ export const getByCategory = async (req: Request, res: Response) => {
             });
         }
     } catch (error) {
-        logger.error((error as Error).message);
+        logger.error(`Error getting all products: ${(error as Error).message}`);
         return res.status(500).json({ error: "An error occurred" });
     }
 };
@@ -86,9 +88,8 @@ export const getByName = async (req: Request, res: Response) => {
 
         res.status(200).json({ productsInfo: products });
     } catch (error) {
-        console.error(
-            "Error searching for products by name:",
-            (error as Error).message
+        logger.error(
+            `Error searching for products by name: ${(error as Error).message}`
         );
         res.status(500).json({ error: "An error occurred" });
     }
@@ -109,8 +110,7 @@ export const getOne = async (req: Request, res: Response) => {
         }
     } catch (error) {
         logger.error(
-            "Error searching for products by id:",
-            (error as Error).message
+            `Error searching for products by id: ${(error as Error).message}`
         );
         return res.status(500).json({ error: "An error occurred" });
     }
@@ -172,7 +172,7 @@ export const update = async (
             data: updatedProduct,
         });
     } catch (error) {
-        logger.error("Error updating a product:", (error as Error).message);
+        logger.error(`Error updating a product: ${(error as Error).message}`);
         return res.status(500).json({ error: "An error occurred" });
     }
 };
@@ -198,7 +198,7 @@ export const deleteProduct = async (
             });
         }
     } catch (error) {
-        logger.error("Error deleting a product:", (error as Error).message);
+        logger.error(`Error deleting a product: ${(error as Error).message}`);
         return res.status(500).json({ error: "An error occurred" });
     }
 };

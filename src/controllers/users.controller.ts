@@ -67,7 +67,7 @@ export const getUser = async (
             }
         }
     } catch (error) {
-        logger.error("Error getting a user:", (error as Error).message);
+        logger.error(`Error getting a user: ${(error as Error).message}`);
         return res.status(500).json({ error: "An error occurred" });
     }
 };
@@ -138,7 +138,7 @@ export const update = async (
             data: updatedUser,
         });
     } catch (error) {
-        logger.error("Error updating a user:", (error as Error).message);
+        logger.error(`Error updating a user: ${(error as Error).message}`);
         return res.status(500).json({ error: "An error occurred" });
     }
 };
@@ -172,7 +172,7 @@ export const deleteUser = async (
             }
         }
     } catch (error) {
-        logger.error("Error deleting a user:", (error as Error).message);
+        logger.error(`Error deleting a user: ${(error as Error).message}`);
         return res.status(500).json({ error: "An error occurred" });
     }
 };
@@ -217,8 +217,7 @@ export const seller = async (
         }
     } catch (error) {
         logger.error(
-            "Error upgrading a user to be a seller:",
-            (error as Error).message
+            `Error upgrading a user to be a seller: ${(error as Error).message}`
         );
         return res.status(500).json({ error: "An error occurred" });
     }
@@ -251,8 +250,9 @@ export const confirmUser = async (
         }
     } catch (error) {
         logger.error(
-            "Error confirm upgrading user to a seller:",
-            (error as Error).message
+            `Error confirm upgrading user to a seller: ${
+                (error as Error).message
+            }`
         );
         return res.status(500).json({ error: "An error occurred" });
     }
